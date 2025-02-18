@@ -22,6 +22,7 @@ const router = createRouter({
 	routes
 })
 
+// @ts-ignore
 router.beforeEach(async (to, from, next) => {
 	const isAuthenticated = pb.authStore.isValid;
 	if (isAuthenticated) {
