@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo VITE_POCKETBASE_URL="${{ vars.POCKETBASE_URL }}" >> .env
+          cat .env
+
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
 
@@ -21,8 +27,3 @@ jobs:
           IMAGE_NAME=ghcr.io/${{ secrets.GHCR_USERNAME }}/dogspotter-reviewer:latest
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
-      - name: 'Create env file'
-        run: |
-          touch .env
-          echo VITE_POCKETBASE_URL="${{ vars.POCKETBASE_URL }}" >> .env
-          cat .env
