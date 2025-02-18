@@ -1,5 +1,5 @@
 # Step 1: Build Vue.js app
-FROM node:16 AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
