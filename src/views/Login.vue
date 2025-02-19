@@ -15,7 +15,9 @@
 
 		<button @click="login"
 			class="bg-gray-800 px-3 py-2 rounded-lg hover:cursor-cell mt-6 w-[80%] sm:w-[60%] md:w-96">
-			<p class="text-white font-semibold">Please oh great Dogspotter lords, please let me in so I can commit the
+			<p class="text-white font-semibold px-3 py-2">Please oh great Dogspotter lords, please let me in so I can
+				perform
+				the
 				holy act of
 				reviewing canine
 				imagery to provide users with internet points for imaginary clout</p>

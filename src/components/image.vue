@@ -7,9 +7,13 @@
 			<button @click="checkImagePoints()"
 				class="bg-green-400 py-2 w-24 rounded-lg hover:cursor-pointer">Approve</button>
 		</div>
-		<div class="flex justify-center">
-			<input @blur="checkNumber()" type="number" min="1" v-model="pointsToAssign" placeholder="Points"
-				class="w-36 border-black border-2 rounded-sm p-1 mt-4">
+		<div class="flex justify-center mt-4">
+			<div class="bg-gray-200 py-1.5 px-3 rounded-md w-36">
+				<p class="text-sm font-semibold text-gray-500 mb-0.5 w-36">Email</p>
+				<input @blur="checkNumber()" type="number" min="1" v-model="pointsToAssign" placeholder="Points"
+					class="w-full">
+			</div>
+
 		</div>
 	</div>
 </template>
@@ -47,6 +51,8 @@ const checkImagePoints = () => {
 		if (window.confirm('You\'ve entered ' + pointsToAssign.value + ' points for this submission, which seems high. Is this correct?')) {
 			approveImage();
 		}
+	} else {
+		approveImage();
 	}
 }
 

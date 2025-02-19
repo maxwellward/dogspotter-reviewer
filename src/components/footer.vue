@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full bg-gray-500 text-white p-4 text-center">
+	<div class="w-full bg-gray-700 text-white p-4 text-center">
 		<p>&copy; {{ new Date().getFullYear() }} Dogspotter</p>
 		<p class="text-sm text-gray-300">To be used by authorized Dogspotter staff only</p>
 		<button v-if="isLoggedIn" @click="logout" class="text-sm hover:cursor-pointer hover:underline">Logout</button>
