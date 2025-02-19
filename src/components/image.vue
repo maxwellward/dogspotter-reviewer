@@ -59,7 +59,8 @@ const checkImagePoints = () => {
 const approveImage = async () => {
 	const data = {
 		"score": pointsToAssign.value,
-		"reviewed": true
+		"reviewed": true,
+		"reviewer": pb.authStore.record?.id
 	};
 
 	await pb.collection('submissions').update(props.submission.id, data);
