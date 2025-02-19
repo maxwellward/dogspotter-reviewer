@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Review from './views/Review.vue'
 import Login from './views/Login.vue'
 import pb from './lib/pocketbase'
+import { useAuthStore } from './store/authStore'
 
 const routes = [
 	{
@@ -24,20 +25,17 @@ const router = createRouter({
 
 // @ts-ignore
 router.beforeEach(async (to, from, next) => {
-	const isAuthenticated = pb.authStore.isValid;
-	if (isAuthenticated) {
+	const authStore = useAuthStore();
+
+	authStore.setIsAuthenticated(pb.authStore.isValid);
+
+	if (authStore.isAuthenticated) {
 		await pb.collection('users').authRefresh();
 	}
 
-	console.log(isAuthenticated);
-
-
 	const isReviewer = pb.authStore.record?.roles.includes('reviewer');
 
-	console.log(isReviewer);
-
-
-	if (to.meta.requiresAuth && !isAuthenticated) {
+	if (to.meta.requiresAuth && (!authStore.isAuthenticated || !isReviewer)) {
 		next('/login');
 	} else {
 		next();
