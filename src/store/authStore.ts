@@ -6,9 +6,14 @@ import router from '../router';
 
 export const useAuthStore = defineStore('auth', {
 	state: () => {
-		return {}
+		return {
+			isAuthenticated: false,
+		}
 	},
 	actions: {
+		setIsAuthenticated(value: boolean) {
+			this.isAuthenticated = value;
+		},
 		async signIn(email: string, password: string) {
 			await pb.collection('users').authWithPassword(email, password);
 			if (!pb.authStore.record?.roles.includes('reviewer')) {
@@ -19,6 +24,7 @@ export const useAuthStore = defineStore('auth', {
 		},
 		async signOut() {
 			await pb.authStore.clear();
+			this.setIsAuthenticated(false)
 			VueCookieNext.removeCookie('authSession');
 			router.push('/login');
 		},
